@@ -2,14 +2,32 @@ import LeadForm from '@/components/LeadForm'
 import TrackingDebug from '@/components/TrackingDebug'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Shield, Users, Zap, CheckCircle } from 'lucide-react'
+import { Shield, Users, Zap, CheckCircle, Search } from 'lucide-react'
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-12 px-4">
-      <div className="container mx-auto max-w-6xl">
-        {/* Header */}
-        <div className="text-center mb-16">
+    <>
+      {/* Header simples apenas para página principal */}
+      <header className="bg-white shadow-sm border-b">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <div className="flex items-center space-x-3">
+              <div className="flex items-center space-x-2">
+                <Users className="h-8 w-8 text-blue-600" />
+                <Search className="h-6 w-6 text-blue-400" />
+              </div>
+              <h1 className="text-xl font-semibold text-gray-900">
+                Sistema de Leads
+              </h1>
+            </div>
+          </div>
+        </div>
+      </header>
+      
+      <main className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-12 px-4">
+        <div className="container mx-auto max-w-6xl">
+          {/* Header */}
+          <div className="text-center mb-16">
           <Badge variant="secondary" className="mb-4 text-sm">
             ✨ Sistema de Leads Modernizado
           </Badge>
@@ -80,18 +98,19 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Footer */}
-        <div className="mt-16 text-center">
-          <p className="text-sm text-gray-500 flex items-center justify-center gap-2">
-            <Shield className="h-4 w-4" />
-            Seus dados estão seguros conosco e serão usados apenas para contato.
-          </p>
+          {/* Footer */}
+          <div className="mt-16 text-center">
+            <p className="text-sm text-gray-500 flex items-center justify-center gap-2">
+              <Shield className="h-4 w-4" />
+              Seus dados estão seguros conosco e serão usados apenas para contato.
+            </p>
+          </div>
         </div>
-      </div>
-      
-      {/* Tracking Debug Component */}
-      <TrackingDebug />
-    </main>
+        
+        {/* Tracking Debug Component */}
+        <TrackingDebug />
+      </main>
+    </>
   )
 }
 
