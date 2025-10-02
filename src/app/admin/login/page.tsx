@@ -12,7 +12,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Loader2, Lock, Mail } from 'lucide-react';
+import { Loader2, Lock, Mail, Users, Search } from 'lucide-react';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -59,6 +59,10 @@ export default function LoginPage() {
       >
         <Card className="shadow-2xl border-0 bg-white/95 backdrop-blur-sm">
           <CardHeader className="space-y-1 text-center">
+            <div className="flex items-center justify-center space-x-2 mb-2">
+              <Users className="h-8 w-8 text-blue-600" />
+              <Search className="h-6 w-6 text-blue-400" />
+            </div>
             <CardTitle className="text-3xl font-bold text-gray-800">
               Painel Administrativo
             </CardTitle>

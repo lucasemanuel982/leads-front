@@ -2,6 +2,16 @@
 
 Frontend construído com Next.js 14, TypeScript, Tailwind CSS e Framer Motion.
 
+## Links de Produção
+-- https://leads-front.vercel.app - Página do formulário
+-- https://leads-front.vercel.app/admin/login -- Página de login
+-- https://leads-front.vercel.app/admin/leads -- Dashboard de leads
+
+-- Login de testes:
+   -- E-mail: leads@leads.com.br
+   -- Senha: leads123
+-- Alternativa é criar um login através do swagger.
+
 ## Estrutura Detalhada do Projeto
 
 ```
