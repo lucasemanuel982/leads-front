@@ -8,7 +8,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
-import { LogOut, Menu, X, BarChart3, Users, Settings } from 'lucide-react';
+import { LogOut, Menu, X, BarChart3, Users, Settings, Search } from 'lucide-react';
 
 interface AdminLayoutProps {
   children: React.ReactNode;
@@ -72,10 +72,16 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
               {sidebarOpen ? <X size={20} /> : <Menu size={20} />}
             </Button>
             <div className="min-w-0 flex-1">
-              <h1 className="text-lg sm:text-2xl font-bold text-gray-800 truncate">
-                Painel Administrativo
-              </h1>
-              <p className="text-xs sm:text-sm text-gray-500 hidden sm:block">Sistema de Leads</p>
+              <div className="flex items-center space-x-2">
+                <Users className="h-6 w-6 text-blue-600 sm:h-8 sm:w-8" />
+                <Search className="h-4 w-4 text-blue-400 sm:h-6 sm:w-6" />
+                <div>
+                  <h1 className="text-lg sm:text-2xl font-bold text-gray-800 truncate">
+                    Painel Administrativo
+                  </h1>
+                  <p className="text-xs sm:text-sm text-gray-500 hidden sm:block">Sistema de Leads</p>
+                </div>
+              </div>
             </div>
           </div>
 
