@@ -103,7 +103,20 @@ export const exportToCSV = (leads: ExportLead[], filename: string = 'leads.csv')
 };
 
 /**
+ * Sanitiza string para prevenir injection e problemas de segurança
+ */
+const sanitizeString = (str: string | undefined | null): string => {
+  if (!str) return '';
+  // Remove caracteres de controle e limita tamanho
+  return String(str)
+    .replace(/[\x00-\x1F\x7F]/g, '')
+    .substring(0, 1000);
+};
+
+/**
  * Converte dados de leads para formato Excel
+ * NOTA: Usa xlsx que tem vulnerabilidades conhecidas, mas apenas para GERAÇÃO de arquivos
+ * (não para parsing de arquivos maliciosos). Dados são sanitizados antes da exportação.
  */
 export const exportToExcel = (leads: ExportLead[], filename: string = 'leads.xlsx') => {
   if (leads.length === 0) {
@@ -111,29 +124,33 @@ export const exportToExcel = (leads: ExportLead[], filename: string = 'leads.xls
     return;
   }
 
-  // Prepara dados para Excel
-  const excelData = leads.map(lead => ({
-    'ID': lead._id,
-    'Nome': lead.name,
-    'Email': lead.email,
-    'Telefone': lead.phone,
-    'Cargo': lead.position,
-    'Data de Nascimento': lead.birthDate,
-    'Mensagem': lead.message || '',
+  // Limita número de leads para prevenir DoS
+  const MAX_LEADS = 10000;
+  const leadsToExport = leads.slice(0, MAX_LEADS);
+
+  // Prepara dados para Excel com sanitização
+  const excelData = leadsToExport.map(lead => ({
+    'ID': sanitizeString(lead._id),
+    'Nome': sanitizeString(lead.name),
+    'Email': sanitizeString(lead.email),
+    'Telefone': sanitizeString(lead.phone),
+    'Cargo': sanitizeString(lead.position),
+    'Data de Nascimento': sanitizeString(lead.birthDate),
+    'Mensagem': sanitizeString(lead.message),
     'Status': lead.isActive ? 'Ativo' : 'Inativo',
-    'Data de Criação': lead.createdAt,
-    'Data de Atualização': lead.updatedAt,
-    'UTM Source': lead.utmSource || '',
-    'UTM Medium': lead.utmMedium || '',
-    'UTM Campaign': lead.utmCampaign || '',
-    'UTM Term': lead.utmTerm || '',
-    'UTM Content': lead.utmContent || '',
-    'GCLID': lead.gclid || '',
-    'FBCLID': lead.fbclid || '',
-    'IP': lead.ipAddress,
-    'User Agent': lead.userAgent || '',
-    'Referrer': lead.referrer || '',
-    'Data de Submissão': lead.submittedAt
+    'Data de Criação': sanitizeString(lead.createdAt),
+    'Data de Atualização': sanitizeString(lead.updatedAt),
+    'UTM Source': sanitizeString(lead.utmSource),
+    'UTM Medium': sanitizeString(lead.utmMedium),
+    'UTM Campaign': sanitizeString(lead.utmCampaign),
+    'UTM Term': sanitizeString(lead.utmTerm),
+    'UTM Content': sanitizeString(lead.utmContent),
+    'GCLID': sanitizeString(lead.gclid),
+    'FBCLID': sanitizeString(lead.fbclid),
+    'IP': sanitizeString(lead.ipAddress),
+    'User Agent': sanitizeString(lead.userAgent),
+    'Referrer': sanitizeString(lead.referrer),
+    'Data de Submissão': sanitizeString(lead.submittedAt)
   }));
 
   // Cria workbook e worksheet
