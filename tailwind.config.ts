@@ -23,7 +23,7 @@ const config: Config = {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "hsl(var(--primary))",
+          DEFAULT: "#137fec",
           foreground: "hsl(var(--primary-foreground))",
           50: '#f0f9ff',
           100: '#e0f2fe',
@@ -36,6 +36,8 @@ const config: Config = {
           800: '#075985',
           900: '#0c4a6e',
         },
+        "background-light": "#f6f7f8",
+        "background-dark": "#101922",
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
@@ -62,9 +64,13 @@ const config: Config = {
         },
       },
       borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        DEFAULT: "0.25rem",
+        lg: "0.5rem",
+        xl: "0.75rem",
+        full: "9999px",
+      },
+      fontFamily: {
+        display: ["Inter", "sans-serif"],
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',
